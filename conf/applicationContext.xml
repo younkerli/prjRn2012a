@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	
+
+
+	<!-- 配置MINA服务 -->
+	<!-- 配置地址 -->
+	<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+		<property name="customEditors">
+			<map>
+				<entry key="java.net.SocketAddress"
+					value="org.apache.mina.integration.beans.InetSocketAddressEditor">
+					<!-- Spring升级后会报错 -->
+					<!-- <bean class="org.apache.mina.integration.beans.InetSocketAddressEditor"></bean> -->
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<!-- 配置业务处理类 -->
+	<bean id="minaServerHandler" class="rn2012a.service.ServerHandler">
+		<property name="sessionMap" ref="sessionMap"></property>
+		<property name="dataPackageMap" ref="dataPackageMap"></property>
+	</bean>
+
+	<!-- 配置编解码拦截器 -->
+	<bean id="codecFilter" class="org.apache.mina.filter.codec.ProtocolCodecFilter">
+		<constructor-arg>
+			<bean class="rn2012a.service.Rn2012aCodecFactory">
+				<constructor-arg name="decoder" ref="rn2012aDecoder"></constructor-arg>
+				<constructor-arg name="encoder" ref="rn2012aEncoder"></constructor-arg>
+			</bean>
+		</constructor-arg>
+	</bean>
+
+	<!-- 配置日志拦截器 -->
+	<bean id="loggingFilter" class="org.apache.mina.filter.logging.LoggingFilter"></bean>
+
+	<!-- 配置拦截器链 -->
+	<bean id="filterChainBuilder"
+		class="org.apache.mina.core.filterchain.DefaultIoFilterChainBuilder">
+		<property name="filters">
+			<map>
+				<entry key="codecFilter" value-ref="codecFilter"></entry>
+				<!-- <entry key="loggingFilter" value-ref="loggingFilter"></entry> -->
+			</map>
+		</property>
+	</bean>
+
+	<!-- 配置IoAcceptor -->
+	<bean id="ioAcceptor" class="org.apache.mina.transport.socket.nio.NioSocketAcceptor"
+		init-method="bind" destroy-method="unbind">
+		<property name="defaultLocalAddress" value=":30050"></property>
+		<property name="handler" ref="minaServerHandler"></property>
+		<property name="filterChainBuilder" ref="filterChainBuilder"></property>
+		<property name="reuseAddress" value="true"></property>
+	</bean>
+
+</beans>

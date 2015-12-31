@@ -1,0 +1,68 @@
+@CHARSET "UTF-8";
+
+#row_1 span{
+	margin: 10px 5px;
+}
+input{
+	border: 1px outset #ffffff;
+	width: 115px;
+	font-size: 1.2em;
+	text-align: center;
+	background-color: #ececec;
+	ime-mode:disabled;
+}
+
+input:focus{
+	border: 0px 2px 2px 0px;
+	border-style: outset;
+	border-color: #2468a2;
+	background: white;
+}
+
+#content .label{
+/* 	color: white;	 */
+}
+
+.value_{
+	float: left;
+	border: 1px solid #aaa;
+}
+
+.val_l{
+	border-right: 0px;
+}
+
+.val_r{
+	border-left: 0px;
+}
+
+.led font{
+	font-size: 1.25em;
+}
+
+.led img{
+	width: 50px;
+	height: 50px;
+}
+
+#borad .con{
+	border-style: none;
+}
+
+#borad .con table{
+	border: 3px groove black;
+	margin: auto;
+}
+#borad .con td{
+	border: 1px solid black;
+	width: 91.5px;
+	text-align: center;
+	color: #050;
+	background-color: #ececec;
+}
+
+#devAdd{
+	width: 110px;
+/* 	height: 18px; */
+	font-size: 1.0em;
+}
