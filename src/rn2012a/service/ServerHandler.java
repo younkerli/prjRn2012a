@@ -40,7 +40,7 @@ public class ServerHandler extends IoHandlerAdapter {
 		// super.messageReceived(session, message);
 		// 业务逻辑
 		int devId = (int) session.getAttribute("devId");
-		if (devId > 10) {
+		if (devId > 200) {
 			return ;
 		}
 		sessionMap.addSession(devId, session);
