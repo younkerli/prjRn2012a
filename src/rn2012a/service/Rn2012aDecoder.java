@@ -11,6 +11,7 @@ import org.apache.mina.filter.codec.ProtocolDecoderOutput;
 import org.apache.mina.filter.codec.demux.MessageDecoder;
 import org.apache.mina.filter.codec.demux.MessageDecoderResult;
 
+import rn2012a.dataPack.DataAddr;
 import rn2012a.dataPack.DataEvent;
 import rn2012a.dataPack.DataLed;
 import rn2012a.dataPack.DataMeasure;
@@ -18,6 +19,7 @@ import rn2012a.dataPack.DataTop;
 import rn2012a.dataPack.DataUser;
 import rn2012a.dataPack.DataValue;
 import rn2012a.dataPack.TimeInfo;
+import rn2012a.frm.AddrFrm;
 import rn2012a.frm.AllDataFrm;
 import rn2012a.frm.EventFrm;
 import rn2012a.frm.GeneralFrame;
@@ -85,7 +87,7 @@ public class Rn2012aDecoder implements MessageDecoder {
 			return MessageDecoderResult.NEED_DATA;
 		}
 		int cmd = in.getUnsignedShort();
-		if (cmd < 1 || cmd > 11) {
+		if (cmd < 1 || cmd > 13) {
 			logger.error(":::未知的命令ID……");
 			return MessageDecoderResult.NOT_OK;
 		} else {
@@ -179,9 +181,12 @@ public class Rn2012aDecoder implements MessageDecoder {
 		case (short) 0x000a:
 			frame = getLedFrm(dataBuf);
 			break;
-		case (short)0x000b:
+		case (short) 0x000b:
 			frame = getAllDataFrm(dataBuf);
 			break;
+		case (short) 0x000d:
+		    frame = getAddrFrm(dataBuf);
+		    break;
 		default:
 			logger.error(":::未找到解码器……");
 			break;
@@ -195,7 +200,17 @@ public class Rn2012aDecoder implements MessageDecoder {
 		return MessageDecoderResult.OK;
 	}
 
-	private AllDataFrm getAllDataFrm(IoBuffer dataBuf) {
+	private AddrFrm getAddrFrm(IoBuffer dataBuf) throws CharacterCodingException
+    {
+	    DataAddr data = new DataAddr();
+	    data.setAddress(dataBuf.getString(charset.newDecoder()));
+	    
+	    AddrFrm frm = new AddrFrm();
+	    frm.setDataAddr(data);
+        return frm;
+    }
+
+    private AllDataFrm getAllDataFrm(IoBuffer dataBuf) {
 		
 		DataTop top = new DataTop();
 		DataValue val = new DataValue();

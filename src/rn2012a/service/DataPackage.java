@@ -3,6 +3,7 @@ package rn2012a.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import rn2012a.dataPack.DataAddr;
 import rn2012a.dataPack.DataEvent;
 import rn2012a.dataPack.DataLed;
 import rn2012a.dataPack.DataMeasure;
@@ -18,8 +19,19 @@ public class DataPackage {
 	private DataUser userData;
 	private DataValue valueData;
 	private DataLed ledData;
+	private DataAddr addrData;
 
-	private boolean hasData = false;
+	public DataAddr getAddrData()
+    {
+        return addrData;
+    }
+
+    public void setAddrData(DataAddr addrData)
+    {
+        this.addrData = addrData;
+    }
+
+    private boolean hasData = false;
 
 	public boolean isHasData() {
 		return hasData;

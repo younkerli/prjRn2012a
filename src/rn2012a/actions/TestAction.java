@@ -1,7 +1,6 @@
 package rn2012a.actions;
 
 import rn2012a.service.DataPackage;
-import rn2012a.service.DataPackageMap;
 import rn2012a.service.ServerHandler;
 
 public class TestAction {
@@ -9,7 +8,9 @@ public class TestAction {
 	private int devId;
 
 	public void setDevId(int devId) {
-		this.devId = devId;
+	    Integer[] devIds = new Integer[addressMap.getLength()];
+	    addressMap.getAddrMap().keySet().toArray(devIds);
+		this.devId = devIds[devId];
 	}
 
 	private ServerHandler minaServer;
@@ -18,16 +19,23 @@ public class TestAction {
 		this.minaServer = minaServer;
 	}
 
-	private DataPackageMap dataPackageMap;
+//	private DataPackageMap dataPackageMap;
+//	
+//	public void setDataPackageMap(DataPackageMap dataPackageMap) {
+//		this.dataPackageMap = dataPackageMap;
+//	}
 	
-	public void setDataPackageMap(DataPackageMap dataPackageMap) {
-		this.dataPackageMap = dataPackageMap;
-	}
+	private AddressMap addressMap;
+	
+	public void setAddressMap(AddressMap addressMap)
+    {
+        this.addressMap = addressMap;
+    }
 	
 	private DataPackage dataPackage;
 	
 	public DataPackage getDataPackage() {
-		this.dataPackage = dataPackageMap.getDataPackage(devId);
+		this.dataPackage = addressMap.getDataPackageMap().getDataPackage(devId);
 		return dataPackage;
 	}
 

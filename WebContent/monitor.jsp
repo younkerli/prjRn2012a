@@ -42,12 +42,13 @@
 		<div class="t"></div>
 		<div id="content">
 			<div id="row_1">
-				<span style="margin-left: 10px"> <s:select id="devId"
-						label="设备编号" list="#{-1:'设备编号...'}" onfocus="gotDevId();"></s:select>
+				<span style="margin-left: 10px"> <s:select id="devAddr"
+						label="设备地址" list="#{-1:'选择设备地址...'}" onfocus="gotDevAddr();"></s:select>
 				</span>
-				<span>
-					<s:textfield id="devAdd" name="devAdd" label="设备地址" value="芮城县供电公司"></s:textfield>
-				</span>
+				<s:hidden id="devId"></s:hidden>
+<%-- 				<span> --%>
+<%-- 					<s:textfield id="devAdd" name="devAdd" label="设备地址" value="芮城县供电公司"></s:textfield> --%>
+<%-- 				</span> --%>
 				<%-- <span> <s:textfield id="cmdId" name="cmdId" label="CmdId"></s:textfield> --%>
 				<%-- </span>  --%>
 <%-- 				<span> <input type="button" value="提交" onclick="gotClick();" /> --%>

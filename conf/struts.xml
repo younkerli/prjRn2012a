@@ -19,7 +19,7 @@
 
 		</action>
 		
-		<action name="devIdAction" class="devIdAction">
+		<action name="devAddrAction" class="devAddrAction">
 		
 			<result type="json"></result>
 		

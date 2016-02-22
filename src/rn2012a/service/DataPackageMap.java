@@ -25,4 +25,15 @@ public class DataPackageMap {
 		logger.info("===DataPackageMap.removeDataPackage():删除设备" + devId + "对应的数据包。");
 		this.map.remove(devId);
 	}
+
+    public HashMap<Integer, String> getDevAddrs()
+    {
+        HashMap<Integer, String> addrMap = new HashMap<>();
+        for (Integer devId : map.keySet())
+        {
+            addrMap.put(devId, map.get(devId).getAddrData().getAddress());
+        }
+        
+        return addrMap;
+    }
 }

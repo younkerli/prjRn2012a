@@ -7,6 +7,10 @@
 	<bean id="sessionMap" class="rn2012a.service.SessionMap"></bean>
 
 	<bean id="dataPackageMap" class="rn2012a.service.DataPackageMap"></bean>
+	
+	<bean id="addrMap" class="rn2012a.actions.AddressMap">
+	    <property name="dataPackageMap" ref="dataPackageMap"></property>
+	</bean>
 
 	<bean id="rn2012aDecoder" class="rn2012a.service.Rn2012aDecoder"></bean>
 
@@ -15,13 +19,15 @@
 
 	<bean id="testAction" class="rn2012a.actions.TestAction" scope="prototype">
 		<property name="minaServer" ref="minaServerHandler"></property>
-		<property name="dataPackageMap" ref="dataPackageMap"></property>
+<!-- 		<property name="dataPackageMap" ref="dataPackageMap"></property> -->
+                <property name="addressMap" ref="addrMap"></property>
 	</bean>
 
 
-	<bean id="devIdAction" class="rn2012a.actions.DevIdAction" scope="prototype">
+	<bean id="devAddrAction" class="rn2012a.actions.DevAddrAction" scope="prototype">
 		<property name="sessionMap" ref="sessionMap"></property>
-		<!-- <property name="dataPackageMap" ref="dataPackageMap"></property> -->
+<!-- 		<property name="dataPackMap" ref="dataPackageMap"></property> -->
+		<property name="addrMap" ref="addrMap"></property>
 	</bean>
 
 	<bean id="loginAction" class="rn2012a.actions.LoginAction" scope="prototype">

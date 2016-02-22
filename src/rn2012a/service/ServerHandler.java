@@ -9,6 +9,7 @@ import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
 
 import rn2012a.dataPack.DataTop;
+import rn2012a.frm.AddrFrm;
 import rn2012a.frm.AllDataFrm;
 import rn2012a.frm.CallDataFrm;
 import rn2012a.frm.EventFrm;
@@ -88,7 +89,10 @@ public class ServerHandler extends IoHandlerAdapter {
 			dataPack.setValueData(frame.getDataValue());
 			dataPack.setMeasureData(frame.getDataMeausre());
 			dataPack.setUserData(frame.getDataUser());
-		} else {
+		} else if (message instanceof AddrFrm) {
+            AddrFrm frame = (AddrFrm) message;
+            dataPack.setAddrData(frame.getDataAddr());
+        } else {
 			logger.error(":::非法数据！");
 		}
 		

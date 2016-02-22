@@ -1,5 +1,6 @@
 package rn2012a.service;
 
+import java.nio.ByteBuffer;
 import java.nio.charset.CharacterCodingException;
 import java.nio.charset.Charset;
 
@@ -9,6 +10,7 @@ import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolEncoderOutput;
 import org.apache.mina.filter.codec.demux.MessageEncoder;
 
+import rn2012a.frm.AddrFrm;
 import rn2012a.frm.CallDataFrm;
 import rn2012a.frm.EventFrm;
 import rn2012a.frm.GeneralFrame;
@@ -61,7 +63,9 @@ public class Rn2012aEncoder implements MessageEncoder<GeneralFrame> {
 			buf.put(dataMessageMenuFrm(frame));
 		} else if (frame instanceof CallDataFrm) {
 			buf.put(dataCallDataFrm(frame));
-		}
+		} else if (frame instanceof AddrFrm) {
+		    buf.put(dataAddrFrm(frame));
+        }
 
 		buf.putUnsignedInt(frame.getTimeStamp());
 		buf.putUnsigned(getCheckSum(buf));
@@ -74,7 +78,19 @@ public class Rn2012aEncoder implements MessageEncoder<GeneralFrame> {
 		out.write(buf);
 	}
 
-	private IoBuffer dataCallDataFrm(GeneralFrame frame) {
+	private IoBuffer dataAddrFrm(GeneralFrame frame) throws CharacterCodingException
+    {
+	    IoBuffer buf = IoBuffer.allocate(10).setAutoExpand(true);
+	    AddrFrm frm = (AddrFrm) frame;
+	    buf.putUnsignedShort(frm.getLength(charset));
+	    buf.putUnsignedShort(frm.getCmdId());
+	    buf.putUnsignedShort(frm.RESRV);
+	    buf.putInt(frm.getDevId());
+	    buf.putString(frm.getDataAddr().getAddress(), charset.newEncoder());
+	    return buf;
+    }
+
+    private IoBuffer dataCallDataFrm(GeneralFrame frame) {
 		IoBuffer buf = IoBuffer.allocate(10).setAutoExpand(true);
 		CallDataFrm frm = (CallDataFrm) frame;
 		buf.putUnsignedShort(frm.getLength(charset));

@@ -32,7 +32,7 @@ function gotClick() {
 		dataType : "json",
 		data : {
 			// action中属性名:值
-			devId : $("#devId option:selected").text(),
+			devId : $("#devAddr option:selected").val(),
 		}
 
 	}).done(
@@ -336,25 +336,26 @@ function gotClick() {
 
 }
 
-function gotDevId() {
+function gotDevAddr() {
 
 	blanking();
 	
 	jQuery.ajax({
 
-		url : "devIdAction.action",
+		url : "devAddrAction.action",
 		type : "post",
 		dataType : "json",
 
 	}).done(function(data) {
 
 		var devIds = data.devIds;
+		var devAddrs = data.devAddrs;
+		
+		$("#devAddr").empty();
+		$("#devAddr").append($("<option>").text("选择设备地址...").val("-1"));
 
-		$("#devId").empty();
-		$("#devId").append($("<option>").text("设备编号...").val("-1"));
-
-		$.each(devIds, function(n, value) {
-			$("#devId").append($("<option/>", {
+		$.each(devAddrs, function(n, value) {
+			$("#devAddr").append($("<option/>", {
 				value : n,
 				text : value
 			}));
