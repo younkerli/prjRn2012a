@@ -18,14 +18,14 @@
 
 
 	<bean id="testAction" class="rn2012a.actions.TestAction" scope="prototype">
-		<property name="minaServer" ref="minaServerHandler"></property>
+<!-- 		<property name="minaServer" ref="minaServerHandler"></property> -->
 <!-- 		<property name="dataPackageMap" ref="dataPackageMap"></property> -->
                 <property name="addressMap" ref="addrMap"></property>
 	</bean>
 
 
 	<bean id="devAddrAction" class="rn2012a.actions.DevAddrAction" scope="prototype">
-		<property name="sessionMap" ref="sessionMap"></property>
+<!-- 		<property name="sessionMap" ref="sessionMap"></property> -->
 <!-- 		<property name="dataPackMap" ref="dataPackageMap"></property> -->
 		<property name="addrMap" ref="addrMap"></property>
 	</bean>
@@ -35,6 +35,10 @@
 
 	<bean id="evtIdAction" class="rn2012a.actions.EvtIdAction" scope="prototype">
 		<property name="dataPackageMap" ref="dataPackageMap"></property>
+	</bean>
+	
+	<bean id="devIdAction" class="rn2012a.actions.DevIdAction" scope="prototype">
+	        <property name="addressMap" ref="addrMap"></property>
 	</bean>
 
 </beans>

@@ -20,6 +20,7 @@
 	src="<%=basePath%>js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/json2.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/myJs.js"></script>
+<%-- <script type="text/javascript" src="<%=basePath%>js/myJs2.js"></script> --%>
 </head>
 
 <body>
@@ -46,6 +47,7 @@
 						label="设备地址" list="#{-1:'选择设备地址...'}" onfocus="gotDevAddr();"></s:select>
 				</span>
 				<s:hidden id="devId"></s:hidden>
+				<span style="margin-left: 10px"> <s:a id="addrMng">设备地址管理</s:a></span>
 <%-- 				<span> --%>
 <%-- 					<s:textfield id="devAdd" name="devAdd" label="设备地址" value="芮城县供电公司"></s:textfield> --%>
 <%-- 				</span> --%>

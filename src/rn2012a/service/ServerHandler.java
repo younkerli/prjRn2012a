@@ -175,11 +175,26 @@ public class ServerHandler extends IoHandlerAdapter {
 		// 2. 根据命令编号，准备数据帧
 		GeneralFrame frame = null;
 
-		if (cmdId < 1 || cmdId > 11) {
+		if (cmdId < 1 || cmdId > 13) {
 			logger.error("===ServerHandler.sendMessage(): 未知的命令ID！");
 			return false;
 		} else {
-			frame = getFrame(cmdId);
+		    switch (cmdId) {
+	        case 11:
+	            frame = new CallDataFrm();
+	            break;
+	        case 13:
+	            AddrFrm addrFrm = new AddrFrm();
+	            String address = dataPackageMap.getDataPackage(devId).getAddrData().getAddress();
+	            addrFrm.getDataAddr().setAddress(address);
+	            frame = addrFrm;
+	            break;
+
+	        default:
+	            break;
+	        }
+
+	        frame.setCmdId(cmdId);
 			frame.setDevId(devId);
 		}
 
@@ -187,14 +202,26 @@ public class ServerHandler extends IoHandlerAdapter {
 
 		return true;
 	}
-
-	private GeneralFrame getFrame(int cmdId) {
-
-		CallDataFrm frame = new CallDataFrm();
-
-		frame.setCmdId(cmdId);
-
-		return frame;
-	}
+//
+//	private GeneralFrame getFrame(int cmdId) {
+//
+//	    GeneralFrame frame = null;
+//	    
+//	    switch (cmdId) {
+//        case 11:
+//            frame = new CallDataFrm();
+//            break;
+//        case 13:
+//            frame = new AddrFrm();
+//            break;
+//
+//        default:
+//            break;
+//        }
+//
+//		frame.setCmdId(cmdId);
+//
+//		return frame;
+//	}
 
 }

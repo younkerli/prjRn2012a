@@ -38,6 +38,18 @@
 			<result name="input">/login.jsp</result>
 		
 		</action>
+		
+		<action name="devIdAction" class="devIdAction">
+		    
+		       <result type="json"></result>
+		    
+		</action>
+		
+		<action name="saveAddr" class="devIdAction" method="save">
+		    
+		      <result type="json">/loginAction</result>  
+		    
+		</action>
 
 	</package>
 

@@ -14,7 +14,7 @@ function setRdOnly(){
 } 
 
 function refrsh(){
-	var aaaa = $("#devId").val() ;
+	var aaaa = $("#devAddr").val() ;
 	if ( aaaa == "-1") {
 		return;
 	} else {
@@ -426,3 +426,10 @@ function blanking(){
 	$("#led_fugui").attr("src", ledOff);
 	
 } 
+
+$(function () {
+	$("#addrMng").click(function () {
+//		window.open("addrMng.jsp", '设备地址管理', 'height=100, width=400, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no');
+		window.showModalDialog('addrMng.jsp', '设备地址管理', 'help:no;dialogWidth:400px;dialogHeight:260px')
+	});
+})

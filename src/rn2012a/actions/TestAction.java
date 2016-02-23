@@ -13,11 +13,11 @@ public class TestAction {
 		this.devId = devIds[devId];
 	}
 
-	private ServerHandler minaServer;
-
-	public void setMinaServer(ServerHandler minaServer) {
-		this.minaServer = minaServer;
-	}
+//	private ServerHandler minaServer;
+//
+//	public void setMinaServer(ServerHandler minaServer) {
+//		this.minaServer = minaServer;
+//	}
 
 //	private DataPackageMap dataPackageMap;
 //	
@@ -45,7 +45,7 @@ public class TestAction {
 
 	public String execute() {
 
-		minaServer.sendMessage(devId, 11);
+		addressMap.getMinaServer().sendMessage(devId, 11);
 
 		return "success";
 	}
