@@ -186,7 +186,10 @@ public class ServerHandler extends IoHandlerAdapter {
 	        case 13:
 	            AddrFrm addrFrm = new AddrFrm();
 	            String address = dataPackageMap.getDataPackage(devId).getAddrData().getAddress();
-	            addrFrm.getDataAddr().setAddress(address);
+	            if (address != null)
+                {
+	                addrFrm.getDataAddr().setAddress(address);
+                }
 	            frame = addrFrm;
 	            break;
 

@@ -23,12 +23,21 @@ public class DataPackage {
 
 	public DataAddr getAddrData()
     {
+	    if (addrData == null)
+        {
+	        addrData = new DataAddr();
+        }
         return addrData;
     }
 
     public void setAddrData(DataAddr addrData)
     {
-        this.addrData = addrData;
+        if (addrData == null)
+        {
+            this.addrData = new DataAddr();
+        } else {
+            this.addrData = addrData;
+        }
     }
 
     private boolean hasData = false;

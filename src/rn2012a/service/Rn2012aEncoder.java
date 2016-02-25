@@ -1,6 +1,5 @@
 package rn2012a.service;
 
-import java.nio.ByteBuffer;
 import java.nio.charset.CharacterCodingException;
 import java.nio.charset.Charset;
 
@@ -86,8 +85,11 @@ public class Rn2012aEncoder implements MessageEncoder<GeneralFrame> {
 	    buf.putUnsignedShort(frm.getCmdId());
 	    buf.putUnsignedShort(frm.RESRV);
 	    buf.putInt(frm.getDevId());
-	    buf.putString(frm.getDataAddr().getAddress(), charset.newEncoder());
-	    return buf;
+	    if (frm.getDataAddr().getAddress() != null)
+        {
+	        buf.putString(frm.getDataAddr().getAddress(), charset.newEncoder());
+        }
+	    return buf.flip();
     }
 
     private IoBuffer dataCallDataFrm(GeneralFrame frame) {

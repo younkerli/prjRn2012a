@@ -10,21 +10,6 @@ public class DevAddrAction extends ActionSupport
      */
     private static final long serialVersionUID = 1L;
 
-//    private SessionMap sessionMap;
-//
-//    public void setSessionMap(SessionMap sessionMap)
-//    {
-//        this.sessionMap = sessionMap;
-//    }
-//
-//    private Integer[] devIds;
-//
-//    public Integer[] getDevIds()
-//    {
-//        this.devIds = sessionMap.getDevIds();
-//        return devIds;
-//    }
-
     private AddressMap addrMap;
 
     public void setAddrMap(AddressMap addrMap)
@@ -36,7 +21,7 @@ public class DevAddrAction extends ActionSupport
     
     public String[] getDevAddrs()
     {
-        addrMap.getAddrMap().values().toArray(devAddrs);
+        devAddrs = addrMap.getAddrs();
         return devAddrs;
     }
 

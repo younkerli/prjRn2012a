@@ -26,14 +26,38 @@ public class DataPackageMap {
 		this.map.remove(devId);
 	}
 
-    public HashMap<Integer, String> getDevAddrs()
+    public Integer getLength()
     {
-        HashMap<Integer, String> addrMap = new HashMap<>();
-        for (Integer devId : map.keySet())
-        {
-            addrMap.put(devId, map.get(devId).getAddrData().getAddress());
-        }
-        
-        return addrMap;
+        return map.size();
     }
+
+    public String[] getAddrs()
+    {
+        String[] addrs = new String[map.size()];
+        DataPackage[] packages = new DataPackage[map.size()];
+        map.values().toArray(packages);
+        for (int i = 0; i < packages.length; i++)
+        {
+            addrs[i] = packages[i].getAddrData().getAddress();
+        }
+        return addrs;
+    }
+
+//    public HashMap<Integer, String> getDevAddrs()
+//    {
+//        HashMap<Integer, String> addrMap = new HashMap<>();
+//        for (Integer devId : map.keySet())
+//        {
+//            addrMap.put(devId, map.get(devId).getAddrData().getAddress());
+//        }
+//        
+//        return addrMap;
+//    }
+    
+//    public Integer[] getDevIds()
+//    {
+//        Integer[] devIds = new Integer[map.size()];
+//        map.keySet().toArray(devIds);
+//        return devIds;
+//    }
 }

@@ -10,6 +10,8 @@
 	
 	<bean id="addrMap" class="rn2012a.actions.AddressMap">
 	    <property name="dataPackageMap" ref="dataPackageMap"></property>
+	    <property name="sessionMap" ref="sessionMap"></property>
+	    <property name="minaServer" ref="minaServerHandler"></property>
 	</bean>
 
 	<bean id="rn2012aDecoder" class="rn2012a.service.Rn2012aDecoder"></bean>

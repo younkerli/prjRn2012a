@@ -355,10 +355,14 @@ function gotDevAddr() {
 		$("#devAddr").append($("<option>").text("选择设备地址...").val("-1"));
 
 		$.each(devAddrs, function(n, value) {
-			$("#devAddr").append($("<option/>", {
-				value : n,
-				text : value
-			}));
+			if (value != null) {
+				if ($.trim(value) != "") {
+					$("#devAddr").append($("<option/>", {
+						value : n,
+						text : value
+					}));
+				}
+			}
 
 		});
 // setInterval("gotClick();", 100);

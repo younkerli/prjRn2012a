@@ -1,0 +1,45 @@
+@CHARSET "UTF-8";
+
+body {
+        padding: 0;
+        margin: 0;
+        text-align: center;
+        background-color: #008080;
+        /*      font-weight: bold; */
+}
+
+#container {
+/* 	background: white; */
+	margin: 0 auto;
+	margin-top: 40px;
+}
+#title {
+/* 	background: cyan; */
+	font-family : 微软雅黑,宋体;
+        font-size : 2em;
+/*         color : #f00; */
+/*         margin-bottom: 10px; */
+        padding-bottom: 20px;
+}
+
+table {
+	margin: 0 auto;
+	text-align: left;
+}
+
+tbody {
+/* 	background: brown; */
+	margin: 10px auto;
+}
+
+button {
+	float: right;
+}
+
+tr {
+/* 	background: blue; */
+}
+
+td {
+/* 	background: red; */
+}

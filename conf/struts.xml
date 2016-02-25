@@ -45,9 +45,15 @@
 		    
 		</action>
 		
+		<action name="showAddr" class="devIdAction" method="show">
+		    
+		      <result type="json"></result>
+		    
+		</action>
+		
 		<action name="saveAddr" class="devIdAction" method="save">
 		    
-		      <result type="json">/loginAction</result>  
+		      <result type="redirect">/addrMng.jsp</result>  
 		    
 		</action>
 
