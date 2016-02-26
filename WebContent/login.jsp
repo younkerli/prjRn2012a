@@ -22,8 +22,8 @@
 
 	<div id="container">
 
+                        <s:a id="userMng" name="userMng">用户注册</s:a>
 		<div id="loginfrm">
-
 			<s:form action="loginAction" theme="simple">
 				<label for="username">用户名:</label>
 				<div class="div_txtbox">
@@ -33,10 +33,10 @@
 				<div class="div_txtbox">
 					<s:password id="password" name="password"></s:password>
 				</div>
-				<label for="region"> 地区: </label>
-				<div class="div_txtbox">
-					<s:textfield id="region" name="region" value="芮城"></s:textfield>
-				</div>
+<!-- 				<label for="region"> 地区: </label> -->
+<!-- 				<div class="div_txtbox"> -->
+<%-- 					<s:textfield id="region" name="region" value="芮城"></s:textfield> --%>
+<!-- 				</div> -->
 				<div class="div_submit">
 					<s:submit value="登陆"></s:submit>
 				</div>

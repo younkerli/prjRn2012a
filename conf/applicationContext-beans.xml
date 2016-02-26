@@ -33,6 +33,7 @@
 	</bean>
 
 	<bean id="loginAction" class="rn2012a.actions.LoginAction" scope="prototype">
+	       <property name="userService" ref="user2file"></property>
 	</bean>
 
 	<bean id="evtIdAction" class="rn2012a.actions.EvtIdAction" scope="prototype">
@@ -41,6 +42,16 @@
 	
 	<bean id="devIdAction" class="rn2012a.actions.DevIdAction" scope="prototype">
 	        <property name="addressMap" ref="addrMap"></property>
+	</bean>
+	
+	<bean id="user" class="rn2012a.entities.User"></bean>
+	
+	<bean id="user2file" class="rn2012a.persistance.User2file">
+	       <property name="userInstance" ref="user"></property>
+	</bean>
+	
+	<bean id="registerAction" class="rn2012a.actions.RegisterAction" scope="prototype">
+                <property name="user2file" ref="user2file"></property>	    
 	</bean>
 
 </beans>

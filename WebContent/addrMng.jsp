@@ -18,7 +18,6 @@
 <script type="text/javascript"
         src="<%=basePath%>js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/myJs2.js"></script>
-<base target=_self>
 </head>
 <body>
 <%--         <s:debug></s:debug> --%>

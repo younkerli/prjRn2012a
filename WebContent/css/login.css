@@ -18,11 +18,21 @@ body {
 
 #loginfrm {
 	float: left;
-	margin-top: 410px;
+	margin-top: 420px;
 	margin-left: 610px;
 	width: 220px;
 	height: 110px;
 /* 	background: brown; */
+}
+
+#userMng {
+	float: right;
+	margin-right: 510px;
+	margin-top: 355px;
+	color: #0074ae;
+	text-decoration: none;
+	font-family: "微软雅黑";
+	font-size: 0.8em;
 }
 
 form{

@@ -2,6 +2,8 @@ package rn2012a.actions;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import rn2012a.persistance.User2file;
+
 public class LoginAction extends ActionSupport {
 
 	/**
@@ -28,10 +30,21 @@ public class LoginAction extends ActionSupport {
 		this.password = password;
 	}
 
+	private User2file userService;
+	
+	public void setUserService(User2file userService)
+    {
+        this.userService = userService;
+    }
+	
 	@Override
 	public String execute() throws Exception {
 		System.out.println("Username:" + username + " Password:" + password);
-		return SUCCESS;
+		if (userService.validation(username, password))
+        {
+		    return SUCCESS;
+        }
+		return "fail";
 	}
 
 }
