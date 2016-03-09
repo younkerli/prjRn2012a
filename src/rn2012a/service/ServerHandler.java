@@ -41,9 +41,9 @@ public class ServerHandler extends IoHandlerAdapter {
 		// super.messageReceived(session, message);
 		// 业务逻辑
 		int devId = (int) session.getAttribute("devId");
-		if (devId > 200) {
-			return ;
-		}
+//		if (devId > 200) {
+//			return ;
+//		}
 		sessionMap.addSession(devId, session);
 		DataPackage dataPack = dataPackageMap.getDataPackage(devId);
 		if (dataPack == null) {
@@ -60,6 +60,7 @@ public class ServerHandler extends IoHandlerAdapter {
 				dataPack.setEventData(frame.getData());
 				session.write(frame);
 			}
+			dataPackageMap.saveEvtsById(devId);
 		} else if (message instanceof MeasureFrm) {
 			MeasureFrm frame = (MeasureFrm) message;
 			dataPack.setMeasureData(frame.getData());

@@ -34,6 +34,7 @@
                                         <s:submit value="提交"></s:submit>
                                 </tbody>
                         </table>
+                <div id="show" style="display: none;"></div>
                 </s:form>
         </div>
 

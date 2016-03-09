@@ -16,8 +16,10 @@ function setRdOnly(){
 function refrsh(){
 	var aaaa = $("#devAddr").val() ;
 	if ( aaaa == "-1") {
+		$("#evtId").attr("disabled", true);
 		return;
 	} else {
+		$("#evtId").attr("disabled", false);
 		gotClick();
 	}
 }
@@ -172,7 +174,7 @@ function gotClick() {
 				
 				//var evtId = $("#evtId option:selected").text();
 				
-				var i = ( $("#evtId").val() == "-1") ? 0 : ($("#evtId option:selected").text() - 1);
+				var i = ( $("#evtId").val() == "-1") ? 0 : ($("#evtId option:selected").val());
 
 				var eventData = data.dataPackage.eventData[i];
 				if (eventData != null) {
@@ -383,12 +385,12 @@ function gotEvtId() {
 		}
 	}).done(function(data) {
 		
-		var evtIds = data.evtIds;
+		var evtTms = data.evtTms;
 		
 		$("#evtId").empty();
 		$("#evtId").append($("<option>").text("事件编号...").val("-1"));
 		
-		$.each(evtIds, function(n, value) {
+		$.each(evtTms, function(n, value) {
 			$("#evtId").append($("<option/>", {
 				value : n,
 				text : value

@@ -22,6 +22,10 @@ public class TestAction {
 	
 	public DataPackage getDataPackage() {
 		this.dataPackage = addressMap.getDataPackageMap().getDataPackage(devId);
+		if (dataPackage.getEventData().isEmpty())
+        {
+            addressMap.getDataPackageMap().loadEvtsById(devId);
+        }
 		return dataPackage;
 	}
 

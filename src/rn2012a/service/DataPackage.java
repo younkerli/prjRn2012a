@@ -110,12 +110,12 @@ public class DataPackage {
 		this.hasData = true;
 	}
 
-	public Integer[] getEvtIds() {
-		Integer[] evtIds = new Integer[eventData.size()];
-		for (int i = 0; i < evtIds.length; i++) {
-			evtIds[i] = i + 1;
-		}
-		return evtIds;
-	}
+//	public Integer[] getEvtIds() {
+//		Integer[] evtIds = new Integer[eventData.size()];
+//		for (int i = 0; i < evtIds.length; i++) {
+//			evtIds[i] = i + 1;
+//		}
+//		return evtIds;
+//	}
 
 }

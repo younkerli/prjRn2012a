@@ -4,7 +4,6 @@ import rn2012a.entities.User;
 
 public class User2file
 {
-
     private User userInstance;
     
     public void setUserInstance(User userInstance)
@@ -22,4 +21,8 @@ public class User2file
         return userInstance.userValidation(username, password);
     }
     
+    public boolean IsUsernameExisted(String username)
+    {
+        return userInstance.Exist(username);
+    }
 }

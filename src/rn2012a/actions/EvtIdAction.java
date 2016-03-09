@@ -5,8 +5,8 @@ import java.util.List;
 import com.opensymphony.xwork2.ActionSupport;
 
 import rn2012a.dataPack.DataEvent;
-import rn2012a.service.DataPackage;
 import rn2012a.service.DataPackageMap;
+import rn2012a.service.SessionMap;
 
 public class EvtIdAction extends ActionSupport {
 
@@ -21,29 +21,50 @@ public class EvtIdAction extends ActionSupport {
 		this.dataPackageMap = dataPackageMap;
 	}
 	
-	private DataPackage dataPackage;
+//	private DataPackage dataPackage;
+//	
+//	public DataPackage getDataPackage() {
+//		this.dataPackage = dataPackageMap.getDataPackage(devId);
+//		return dataPackage;
+//	}
 	
-	public DataPackage getDataPackage() {
-		this.dataPackage = dataPackageMap.getDataPackage(devId);
-		return dataPackage;
-	}
+	private SessionMap sessionMap;
+	
+	public void setSessionMap(SessionMap sessionMap)
+    {
+        this.sessionMap = sessionMap;
+    }
 	
 	private int devId;
 	
-	public void setDevId(int devId) {
-		this.devId = devId;
-	}
+	public void setDevId(int devId)
+    {
+        this.devId = devId;
+    }
+//	private Integer[] evtIds;
+//	
+//	public Integer[] getEvtIds() {
+//		List<DataEvent> events = dataPackageMap.getDataPackage(devId).getEventData();
+//		
+//		evtIds = new Integer[events.size()];
+//		for (int i = 0; i < evtIds.length; i++) {
+//			evtIds[i] = i + 1;
+//		}
+//		return evtIds;
+//	}
+//	
+	private String[] evtTms;
 	
-	private Integer[] evtIds;
-	
-	public Integer[] getEvtIds() {
-		List<DataEvent> events = dataPackageMap.getDataPackage(devId).getEventData();
-		
-		evtIds = new Integer[events.size()];
-		for (int i = 0; i < evtIds.length; i++) {
-			evtIds[i] = i + 1;
-		}
-		return evtIds;
+	public String[] getEvtTms() {
+	    Integer[] devIds = sessionMap.getDevIds();
+        this.devId = devIds[devId];
+	    List<DataEvent> events = dataPackageMap.getDataPackage(devId).getEventData();
+	    evtTms = new String[events.size()];
+	    for (int i = 0; i < evtTms.length; i++)
+        {
+	        evtTms[i] = events.get(i).getTm().strDateInfo();
+        }
+	    return evtTms;
 	}
 	
 	@Override

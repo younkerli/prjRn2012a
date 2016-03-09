@@ -6,96 +6,50 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
-public class User
+public class User extends FileOperate
 {
-    private String username;
-    private String password;
-
-    public String getUsername()
-    {
-        return username;
-    }
-
-    public String getPassword()
-    {
-        return password;
-    }
-
-    public void setUsername(String username)
-    {
-        this.username = username;
-    }
-
-    public void setPassword(String password)
-    {
-        this.password = password;
-    }
 
     private static String separator = "--";
 
-//    private String filepath = this.getClass().getClassLoader().getResource("").getPath().replace("%20", " ") + "files/user/";
+    // private String filepath =
+    // this.getClass().getClassLoader().getResource("").getPath().replace("%20",
+    // " ") + "files/user/";
     private String filepath = "C:/prjData/files/user/";
     private String filename = "user1.txt";
-    
-    @Override
-    public String toString()
-    {
-        return "User [" + username + separator + password + "]";
-    }
 
     public void save(String username, String password)
     {
-        this.password = password;
-        this.username = username;
+        Users.put(username, password);
+        saveUsers();
+    }
+
+    public boolean userValidation(String username, String password)
+    {
+        if (!Users.containsKey(username))
+        {
+            System.out.println("用户不存在！");
+            return false;
+        }
+        if (!Users.get(username).equals(password))
+        {
+            System.out.println("密码错误！");
+            return false;
+        }
+        return true;
+    }
+
+    private Map<String, String> Users = new HashMap<>();
+
+    public void loadUsers()
+    {
         File file = new File(filepath + filename);
         if (!file.exists())
         {
             System.out.println("文件不存在！");
-            if (file.getParentFile().exists())
-            {
-                System.out.println("目录已经存在！");
-            } else
-            {
-                System.out.println("目录不存在！");
-                if (!file.getParentFile().mkdirs())
-                {
-                    System.out.println("创建目录失败！");
-                    return;
-                }
-            }
-
-            try
-            {
-                file.createNewFile();
-            } catch (IOException e)
-            {
-                System.out.println("文件创建失败！");
-                e.printStackTrace();
-            }
-        }
-        String s = username + separator + password + "\r\n";
-        try
-        {
-            FileWriter fileWriter = new FileWriter(file, true);
-            fileWriter.write(s);
-            fileWriter.close();
-        } catch (IOException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-    
-    public boolean userValidation(String username, String password)
-    {
-        this.username = username;
-        this.password = password;
-        File file = new File(filepath + filename);
-        if (!file.exists())
-        {
-            System.out.println( filename + "不存在！");
-            return false;
+            return;
         }
         BufferedReader reader = null;
         try
@@ -108,31 +62,65 @@ public class User
                 while ((tmpStr = reader.readLine()) != null)
                 {
                     data = tmpStr.split(separator);
-                    if (username.equals(data[0]) && password.equals(data[1]))
-                    {
-                        System.out.println("验证成功！");
-                        return true;
-                    }
+                    Users.put(data[0], data[1]);
                 }
-            } catch (IOException e)
+            } catch (Exception e)
             {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         } catch (FileNotFoundException e)
         {
-            System.out.println( filename + "读取失败！");
+            System.out.println("文件读取失败！");
             e.printStackTrace();
-        } finally {
+        } finally
+        {
             try
             {
                 reader.close();
             } catch (IOException e)
             {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
-        return false;
+    }
+
+    public void saveUsers()
+    {
+        String[] usernames = new String[Users.size()];
+        Users.keySet().toArray(usernames);
+        FileWriter fileWriter = null;
+        try
+        {
+            fileWriter = new FileWriter(this.initFile(filepath, filename));
+            String string = null;
+            for (String name : usernames)
+            {
+                string = name + separator + Users.get(name) + "\r\n";
+                fileWriter.write(string);
+            }
+        } catch (IOException e)
+        {
+            System.out.println("文件写入失败！");
+            e.printStackTrace();
+        } finally
+        {
+            try
+            {
+                fileWriter.close();
+            } catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public User()
+    {
+        loadUsers();
+    }
+
+    public boolean Exist(String username)
+    {
+        return Users.containsKey(username);
     }
 }
