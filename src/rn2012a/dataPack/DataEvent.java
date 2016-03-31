@@ -16,15 +16,8 @@ public class DataEvent extends DataBox
         tm = new TimeInfo();
         tm.setMinute(time % 100);
         time /= 100;
-        int hour = time % 100;
-        if (hour < 12)
-        {
-            tm.setHour(hour);
-            tm.setAmpm(0);
-        } else {
-            tm.setHour(hour - 12);
-            tm.setAmpm(1);
-        }
+        tm.setHour(time % 100);
+        tm.setAmpm(0);
         time /= 100;
         tm.setDate(time % 100);
         time /= 100;
@@ -36,7 +29,7 @@ public class DataEvent extends DataBox
         
         event = Integer.valueOf(tmpStrs[2]);
         voltage = Float.valueOf(tmpStrs[3]);
-        pharse = tmpStrs[4];
+        pharse = tmpStrs[4].isEmpty() ? "" : tmpStrs[4];
         
         reserved = 0;
         devId = 0;

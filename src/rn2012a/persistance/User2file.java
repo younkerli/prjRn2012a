@@ -18,11 +18,19 @@ public class User2file
 
     public boolean validation(String username, String password)
     {
+        if (userInstance.IsUsersEmpty())
+        {
+            userInstance.loadUsers();
+        }
         return userInstance.userValidation(username, password);
     }
     
     public boolean IsUsernameExisted(String username)
     {
+        if (userInstance.IsUsersEmpty())
+        {
+            userInstance.loadUsers();
+        }
         return userInstance.Exist(username);
     }
 }

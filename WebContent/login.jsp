@@ -19,7 +19,7 @@
 <script type="text/javascript" src="<%=basePath%>js/login.js"></script>
 </head>
 <body>
-
+<%--         <s:debug></s:debug> --%>
 	<div id="container">
 
                         <s:a id="userMng" name="userMng">用户注册</s:a>
@@ -41,6 +41,7 @@
 					<s:submit value="登陆"></s:submit>
 				</div>
 				<div class="div_error">
+				    ${sessionScope.msg }
 					<s:fielderror />
 				</div>
 			</s:form>

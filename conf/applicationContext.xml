@@ -25,6 +25,7 @@
 	<bean id="minaServerHandler" class="rn2012a.service.ServerHandler">
 		<property name="sessionMap" ref="sessionMap"></property>
 		<property name="dataPackageMap" ref="dataPackageMap"></property>
+		<property name="eventOperate" ref="eventOperate"></property>
 	</bean>
 
 	<!-- 配置编解码拦截器 -->

@@ -17,6 +17,7 @@ public class DataPackageMap
     public void addDataPackage(Integer devId, DataPackage dataPackage)
     {
         logger.info("===DataPackageMap.addDataPackage():保存数据包到DataPackageMap--- devId=" + devId);
+        event.loadEvts(devId, dataPackage.getEventData());
         this.map.put(devId, dataPackage);
     }
 
@@ -56,8 +57,8 @@ public class DataPackageMap
     {
         for (Integer devid : map.keySet())
         {
-            event.setEvtdata(map.get(devid).getEventData());
-            event.save(devid);
+//            event.setEvtdata(map.get(devid).getEventData());
+            event.save(devid, map.get(devid).getEventData());
         }
     }
 
@@ -65,8 +66,8 @@ public class DataPackageMap
     {
         for (Integer devid : map.keySet())
         {
-            event.setEvtdata(map.get(devid).getEventData());
-            event.loadEvts(devid);
+//            event.setEvtdata(map.get(devid).getEventData());
+            event.loadEvts(devid, map.get(devid).getEventData());
         }
     }
 
@@ -77,17 +78,25 @@ public class DataPackageMap
             System.out.println("不存在的设备编号！");
             return false;
         } else {
-            event.setEvtdata(map.get(devId).getEventData());
-            event.save(devId);
+//            event.setEvtdata(map.get(devId).getEventData());
+            event.save(devId, map.get(devId).getEventData());
             return true;
         }
     }
-    
-    public void loadEvtsById(Integer devId)
+
+    public String getAddrById(Integer integer)
     {
-        event.setEvtdata(map.get(devId).getEventData());
-        event.loadEvts(devId);
+        return map.get(integer).getAddrData().getAddress();
     }
+    
+//    public void loadEvtsById(Integer devId)
+//    {
+//        event.setEvtdata(map.get(devId).getEventData());
+//        if (map.get(devId).getEventData().isEmpty())
+//        {
+//            
+//        }
+//    }
     
     // public HashMap<Integer, String> getDevAddrs()
     // {

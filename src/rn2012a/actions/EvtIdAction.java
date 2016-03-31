@@ -21,6 +21,13 @@ public class EvtIdAction extends ActionSupport {
 		this.dataPackageMap = dataPackageMap;
 	}
 	
+//	private Event2file event2file;
+//	
+//	public void setEvent2file(Event2file event2file)
+//    {
+//        this.event2file = event2file;
+//    }
+	
 //	private DataPackage dataPackage;
 //	
 //	public DataPackage getDataPackage() {

@@ -79,6 +79,8 @@ label{
 	float: left;
 	clear:left;
 	margin-top: 5px;
+	color: red;
+	font-size: 0.8em;
 /* 	background: red; */
 }
 

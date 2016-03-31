@@ -46,7 +46,7 @@ function gotClick() {
 					$("#t_tm").val(
 							topData.tm.hour + ":" + padLeft(topData.tm.minute,2) + ":"
 							+ padLeft(topData.tm.second,2));
-					$("#t_switch").val(topData.switchState?"关":"开");
+					$("#t_switch").val(topData.switchState?"分":"合");
 					$("#t_ptValue").val(topData.ptValue +"V");
 				}
 				
@@ -381,7 +381,8 @@ function gotEvtId() {
 		dataType : "json",
 		data : {
 			// action中属性名:值
-			devId : $("#devId option:selected").text()
+//			devId : $("#devId option:selected").text()
+			devId : $("#devId option:selected").val()
 		}
 	}).done(function(data) {
 		

@@ -21,8 +21,14 @@ public class DataAddr extends DataBox
     public int getLen()
     {
         // TODO Auto-generated method stub
-        Charset charset = Charset.forName("UTF-8");
-        return address.getBytes(charset).length;
+        if (address == null)
+        {
+            return 0;
+        }
+        else {
+            Charset charset = Charset.forName("UTF-8");
+            return address.getBytes(charset).length;
+        }
     }
 
     @Override

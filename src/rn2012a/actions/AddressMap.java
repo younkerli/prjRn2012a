@@ -83,12 +83,19 @@ public class AddressMap
 
     public String[] getAddrs()
     {
-        if (dataPackageMap == null)
+//        if (dataPackageMap == null)
+//        {
+//            return null;
+//        }
+//        return dataPackageMap.getAddrs(); 
+        Integer[] DevIds = sessionMap.getDevIds(); 
+        String[] addrs = new String[DevIds.length];
+        for (int i = 0; i < addrs.length; i++)
         {
-            return null;
+            String addr = dataPackageMap.getAddrById(DevIds[i]);
+            addrs[i] = addr == null ? "null" : addr;
         }
-        return dataPackageMap.getAddrs(); 
-        
+        return addrs;
     }
     
     public Integer getLength()

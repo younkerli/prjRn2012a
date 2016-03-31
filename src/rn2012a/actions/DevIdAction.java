@@ -101,6 +101,7 @@ public class DevIdAction extends ActionSupport
     public String save()
     {
         boolean unModified = addr.equals(addressMap.getAddress(id));
+        
         if (!unModified)
         {
             addressMap.setAddress(id, addr);

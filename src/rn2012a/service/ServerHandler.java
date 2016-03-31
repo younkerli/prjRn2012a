@@ -9,6 +9,7 @@ import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
 
 import rn2012a.dataPack.DataTop;
+import rn2012a.entities.Event;
 import rn2012a.frm.AddrFrm;
 import rn2012a.frm.AllDataFrm;
 import rn2012a.frm.CallDataFrm;
@@ -36,11 +37,22 @@ public class ServerHandler extends IoHandlerAdapter {
 		this.dataPackageMap = dataPackageMap;
 	}
 	
+	public Event eventOperate;
+	
+	public void setEventOperate(Event eventOperate)
+    {
+        this.eventOperate = eventOperate;
+    }
+	
 	@Override
 	public void messageReceived(IoSession session, Object message) throws Exception {
 		// super.messageReceived(session, message);
 		// 业务逻辑
 		int devId = (int) session.getAttribute("devId");
+		if (!eventOperate.InitFileByDevId(devId))
+        {
+           logger.info("===ServerHandler.messageReceived():创建事件记录文件失败！"); 
+        }
 //		if (devId > 200) {
 //			return ;
 //		}
@@ -54,6 +66,7 @@ public class ServerHandler extends IoHandlerAdapter {
 		String msg = message.toString();
 		logger.info("===ServerHandler.messageReceived():服务器接收到的数据为：" + msg);
 
+		
 		if (message instanceof EventFrm) {
 			EventFrm frame = (EventFrm) message;
 			if (frame.isDisplay()) {
@@ -98,6 +111,7 @@ public class ServerHandler extends IoHandlerAdapter {
 		}
 		
 	}
+	
 
 	@Override
 	public void sessionCreated(IoSession session) throws Exception {

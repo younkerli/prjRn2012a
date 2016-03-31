@@ -7,12 +7,6 @@
 	<bean id="sessionMap" class="rn2012a.service.SessionMap"></bean>
 
 	<bean id="dataPackageMap" class="rn2012a.service.DataPackageMap"></bean>
-	
-	<bean id="addrMap" class="rn2012a.actions.AddressMap">
-	    <property name="dataPackageMap" ref="dataPackageMap"></property>
-	    <property name="sessionMap" ref="sessionMap"></property>
-	    <property name="minaServer" ref="minaServerHandler"></property>
-	</bean>
 
 	<bean id="rn2012aDecoder" class="rn2012a.service.Rn2012aDecoder"></bean>
 
@@ -33,7 +27,7 @@
 	</bean>
 
 	<bean id="loginAction" class="rn2012a.actions.LoginAction" scope="prototype">
-	       <property name="userService" ref="user2file"></property>
+	       <property name="userService" ref="user"></property>
 	</bean>
 
 	<bean id="evtIdAction" class="rn2012a.actions.EvtIdAction" scope="prototype">
@@ -47,12 +41,26 @@
 	
 	<bean id="user" class="rn2012a.entities.User"></bean>
 	
-	<bean id="user2file" class="rn2012a.persistance.User2file">
-	       <property name="userInstance" ref="user"></property>
-	</bean>
+<!-- 	<bean id="user2file" class="rn2012a.persistance.User2file"> -->
+<!-- 	       <property name="userInstance" ref="user"></property> -->
+<!-- 	</bean> -->
 	
 	<bean id="registerAction" class="rn2012a.actions.RegisterAction" scope="prototype">
-                <property name="user2file" ref="user2file"></property>	    
+                <property name="userService" ref="user"></property>	    
 	</bean>
 
+	<bean id="event2file" class="rn2012a.persistance.Event2file">
+	       <property name="dataPackageMap" ref="dataPackageMap"></property>
+	    
+	</bean>
+	       
+        <bean id="eventOperate" class="rn2012a.entities.Event"></bean>
+        
+        <bean id="addrMap" class="rn2012a.actions.AddressMap">
+            <property name="dataPackageMap" ref="dataPackageMap"></property>
+            <property name="sessionMap" ref="sessionMap"></property>
+            <property name="minaServer" ref="minaServerHandler"></property>
+        </bean>
+	
+	
 </beans>

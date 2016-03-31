@@ -14,12 +14,14 @@ public class User extends FileOperate
 
     private static String separator = "--";
 
-    // private String filepath =
-    // this.getClass().getClassLoader().getResource("").getPath().replace("%20",
-    // " ") + "files/user/";
-    private String filepath = "C:/prjData/files/user/";
+     private String filepath =
+     this.getClass().getClassLoader().getResource("").getPath().replace("%20",
+     " ") + "files/user/";
+//    private String filepath = "C:/prjData/files/user/";
     private String filename = "user1.txt";
 
+    private Map<String, String> Users = new HashMap<>();
+    
     public void save(String username, String password)
     {
         Users.put(username, password);
@@ -40,15 +42,18 @@ public class User extends FileOperate
         }
         return true;
     }
-
-    private Map<String, String> Users = new HashMap<>();
+    
+    private File file = new File(filepath + filename);
 
     public void loadUsers()
     {
-        File file = new File(filepath + filename);
         if (!file.exists())
         {
-            System.out.println("文件不存在！");
+            System.out.println("===User.loadUsers():"+ filename + "不存在！");
+            if (!initFlie())
+            {
+               System.out.println("===User.loadUsers():用户文件创建失败！"); 
+            }
             return;
         }
         BufferedReader reader = null;
@@ -91,7 +96,12 @@ public class User extends FileOperate
         FileWriter fileWriter = null;
         try
         {
-            fileWriter = new FileWriter(this.initFile(filepath, filename));
+            if (!file.exists())
+            {
+                System.out.println(filename + "不存在！");
+                return;
+            }
+            fileWriter = new FileWriter(file);
             String string = null;
             for (String name : usernames)
             {
@@ -114,13 +124,28 @@ public class User extends FileOperate
         }
     }
 
-    public User()
-    {
-        loadUsers();
-    }
+//    public User()
+//    {
+//        if (!initFlie())
+//        {
+//            System.out.println("===User.User():创建用户文件失败！");
+//        }
+//        loadUsers();
+//    }
 
+    public boolean IsUsersEmpty()
+    {
+        return Users.isEmpty();
+    }
+    
     public boolean Exist(String username)
     {
         return Users.containsKey(username);
     }
+    
+    public boolean initFlie()
+    {
+        return initFile(filepath, filename);
+    }
+    
 }

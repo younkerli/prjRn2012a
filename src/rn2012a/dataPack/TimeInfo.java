@@ -87,7 +87,8 @@ public class TimeInfo extends DataBox{
 
 	public String strDateInfo()
 	{
-	    return "--" + this.year + this.month + this.date + ((this.ampm == 0)? this.hour : (this.hour + 12)) + this.minute; 
+	    return "--" + String.format("%02d", this.year) + String.format("%02d", this.month) + String.format("%02d", this.date) + 
+	            String.format("%02d", this.hour) + String.format("%02d", this.minute); 
 	}
 	
 }

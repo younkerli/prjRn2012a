@@ -12,41 +12,56 @@ import rn2012a.dataPack.DataEvent;
 
 public class Event extends FileOperate
 {
-    private List<DataEvent> evtdata;
-
-    public void setEvtdata( List <DataEvent> evtdata)
-    {
-        this.evtdata = evtdata;
-    }
+//    private List<DataEvent> evtdata;
+//
+//    public void setEvtdata( List <DataEvent> evtdata)
+//    {
+//        this.evtdata = evtdata;
+//    }
 
     private static String separator = "--";
 
-    // private String filepath =
-    // this.getClass().getClassLoader().getResource("").getPath().replace("%20",
-    // " ") + "files/user/";
-    private String filepath = "C:/prjData/files/event/";
+     private String filepath =
+     this.getClass().getClassLoader().getResource("").getPath().replace("%20",
+     " ") + "files/event/";
+//    private String filepath = "C:/prjData/files/event/";
     private String filename = null;
 
-    public void save(Integer devId)
+    public void save(Integer devId, List<DataEvent> evtdata)
     {
         filename = "dev" + devId + ".txt";
+        FileWriter fileWriter = null;
         try
         {
-            FileWriter writer = new FileWriter(initFile(filepath, filename));
+            File file = new File(filepath + filename);
+            if (!file.exists())
+            {
+                System.out.println(filename + "文件不存在！");
+            }
+            fileWriter = new FileWriter(file);
             for (DataEvent dataEvent : evtdata)
             {
                 String string = dataEvent.getTm().strDateInfo() + separator + dataEvent.getEvent() + separator + dataEvent.getVoltage() + separator + dataEvent.getPharse() + "\r\n";
-                writer.write(string);
+                fileWriter.write(string);
             }
-            writer.close();
+//            writer.close();
         } catch (IOException e)
         {
             // TODO Auto-generated catch block
             e.printStackTrace();
+        } finally {
+            try
+            {
+                fileWriter.close();
+            } catch (IOException e)
+            {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
     }
 
-    public void loadEvts(Integer devId)
+    public void loadEvts(Integer devId, List<DataEvent> evtdata)
     {
         filename = "dev" + devId + ".txt";
         File file = new File(filepath + filename);
@@ -88,5 +103,10 @@ public class Event extends FileOperate
                 e.printStackTrace();
             }
         }
+    }
+    
+    public boolean InitFileByDevId(Integer devId)
+    {
+        return initFile(filepath, "dev" + devId + ".txt");
     }
 }
