@@ -19,7 +19,6 @@ import rn2012a.dataPack.DataTop;
 import rn2012a.dataPack.DataUser;
 import rn2012a.dataPack.DataValue;
 import rn2012a.dataPack.TimeInfo;
-import rn2012a.entities.Event;
 import rn2012a.frm.AddrFrm;
 import rn2012a.frm.AllDataFrm;
 import rn2012a.frm.EventFrm;
@@ -68,12 +67,12 @@ public class Rn2012aDecoder implements MessageDecoder {
 //		in.flip();
 //		tmp.flip();
 
-		byte[] dt2 = in.array();
-		for (int i = 0; i < in.limit(); i++) {
-			logger.info("data[" + i +"]: " + Integer.toHexString((dt2[i]) & 0xff) );
-		}
+//		byte[] dt2 = in.array();
+//		for (int i = 0; i < in.limit(); i++) {
+//			logger.info("data[" + i +"]: " + Integer.toHexString((dt2[i]) & 0xff) );
+//		}
 		
-		logger.info("===Rn2012aDecoder.decodable():data:" + in.toString());
+//		logger.info("===Rn2012aDecoder.decodable():data:" + in.toString());
 
 		if (in.remaining() < 19) {
 			logger.info(":::数据长度小于最小帧长");
@@ -111,12 +110,13 @@ public class Rn2012aDecoder implements MessageDecoder {
 
 	@Override
 	public MessageDecoderResult decode(IoSession session, IoBuffer in, ProtocolDecoderOutput out) throws Exception {
-		logger.info("===Rn2012aDecoder.decode():decode:" + in.toString());
+
+//		logger.info("===Rn2012aDecoder.decode():decode:" + in.toString());
 		
-		byte[] dt = in.array();
-		for (int i = 0; i < in.limit(); i++) {
-			logger.info("data[" + i +"]: " + Integer.toHexString((dt[i]) & 0xff) );
-		}
+//		byte[] dt = in.array();
+//		for (int i = 0; i < in.limit(); i++) {
+//			logger.info("data[" + i +"]: " + Integer.toHexString((dt[i]) & 0xff) );
+//		}
 		
 		CharsetDecoder decoder = charset.newDecoder();// 指定字符集的解码器
 		GeneralFrame frame = null;
@@ -269,10 +269,10 @@ public class Rn2012aDecoder implements MessageDecoder {
 		String[] phones = new String[5];
 		for (int i = 0; i < phones.length; i++) {
 			String phone = new String();
-			for (int j = 0; j < 11; j++) {
+			for (int j = 0; j < 13; j++) {
 				phone += dataBuf.get();
 			}
-			phones[i] = phone;
+			phones[i] = phone.substring(0, 11);
 		}
 		usr.setUserphone(phones);
 		usr.setCount(dataBuf.get());
@@ -325,6 +325,9 @@ public class Rn2012aDecoder implements MessageDecoder {
 		char[] tmp = {(char) dataBuf.get()};
 		data.setPharse(new String(tmp));
 		data.setReserved(dataBuf.get());
+		
+		logger.info(":::收到事件数据：" + data.toString());
+		
 		
 		EventFrm frm = new EventFrm();
 		frm.setData(data);

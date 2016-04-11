@@ -56,6 +56,10 @@ public class ServerHandler extends IoHandlerAdapter {
 //		if (devId > 200) {
 //			return ;
 //		}
+//		if (sessionMap.getSession(devId) == session)
+//        {
+//		    sessionMap.addSession(devId, session);
+//        }
 		sessionMap.addSession(devId, session);
 		DataPackage dataPack = dataPackageMap.getDataPackage(devId);
 		if (dataPack == null) {

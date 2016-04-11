@@ -11,7 +11,7 @@ public class FileOperate
         File file = new File(filepath + filename);
         if (file.exists())
         {
-            System.out.println(filename+ "已经存在！");
+//            System.out.println(filename+ "已经存在！");
             return true;
         }
         else

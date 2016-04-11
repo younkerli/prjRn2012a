@@ -72,7 +72,8 @@
 	    
 	               <action name="loginAction" class="loginAction">
                         
-                        <result type="redirect">/monitor.jsp</result>
+<!--                         <result type="redirect">/monitor.jsp</result> -->
+                        <result>/monitor.jsp</result>
                         
 <!--                    <result name="input">/login.jsp</result> -->
                         

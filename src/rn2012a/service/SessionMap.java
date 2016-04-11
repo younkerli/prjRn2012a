@@ -22,7 +22,7 @@ public class SessionMap {
 
 	public IoSession getSession(Integer devId) {
 
-		logger.info("===SessionMap.getSession():从SessionMap获取会话--- devId=" + devId);
+//		logger.info("===SessionMap.getSession():从SessionMap获取会话--- devId=" + devId);
 		return this.map.get(devId);
 
 	}

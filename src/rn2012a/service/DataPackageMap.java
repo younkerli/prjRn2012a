@@ -23,7 +23,7 @@ public class DataPackageMap
 
     public DataPackage getDataPackage(Integer devId)
     {
-        logger.info("===DataPackageMap.getDataPackage():从DataPackageMap获取数据包--- devId=" + devId);
+//        logger.info("===DataPackageMap.getDataPackage():从DataPackageMap获取数据包--- devId=" + devId);
         DataPackage dp = this.map.get(devId);
         return dp;
     }
